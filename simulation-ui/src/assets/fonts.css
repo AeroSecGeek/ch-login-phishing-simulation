@@ -1,0 +1,16 @@
+@font-face {
+  font-family: "RotisSansSerifLight";
+  src: url("./fonts/RotisSansSerifLight45.woff") format("woff");
+  font-weight: 500; /* Adjust as necessary */
+  font-style: normal;
+}
+@font-face {
+  font-family: "Bold65";
+  src: url("./fonts/bold65.woff") format("woff");
+  font-weight: 500; /* Adjust as necessary */
+  font-style: normal;
+}
+
+body {
+  font-family: "RotisSansSerifLight", sans-serif;
+}

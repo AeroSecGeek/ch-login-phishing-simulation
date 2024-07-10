@@ -1,9 +1,14 @@
 import { Box } from "@mui/material";
+import { Header } from "../components/login/Header";
+import { Footer } from "../components/login/Footer";
+import { Form } from "../components/login/Form";
 
 export function Login() {
   return (
     <Box>
-      <p>TODO: replace with CH-Login</p>
+      <Header />
+      <Form />
+      <Footer />
     </Box>
   );
 }
