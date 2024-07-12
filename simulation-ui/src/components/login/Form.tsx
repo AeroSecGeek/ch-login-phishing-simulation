@@ -6,6 +6,8 @@ import {
   Divider,
   TextField,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import chLogin from "../../assets/CH-Login.svg";
 import footerLogin from "../../assets/footer-login.svg";
@@ -15,6 +17,9 @@ import { OtherLogins } from "./OtherLogins";
 export function Form() {
   const [email, setEmail] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Box
@@ -36,7 +41,12 @@ export function Form() {
           mb: "24px",
         }}
       >
-        <CardContent sx={{ padding: 0, ":last-child": { paddingBottom: 0 } }}>
+        <CardContent
+          sx={{
+            padding: 0,
+            ":last-child": { paddingBottom: 0 },
+          }}
+        >
           <Box textAlign={"center"}>
             <img src={chLogin} alt="CH-Login-Icon" />
             <Divider variant="fullWidth" />
@@ -49,7 +59,13 @@ export function Form() {
               flexDirection: "column",
             }}
           >
-            <Box sx={{ width: "100%", maxWidth: "560px", mt: "24px" }}>
+            <Box
+              sx={{
+                width: isMobile ? "90%" : "100%",
+                maxWidth: "560px",
+                mt: "24px",
+              }}
+            >
               <Typography sx={{ fontFamily: "Bold65", fontSize: "1.125rem" }}>
                 Geben Sie Ihr E-Mail ein, um fortzufahren
               </Typography>
@@ -85,6 +101,7 @@ export function Form() {
             </Box>
             <Box
               sx={{
+                position: "relative",
                 mt: "32px",
                 bgcolor: "primary.light",
                 width: "100%",
@@ -101,6 +118,7 @@ export function Form() {
                   flexDirection: "column",
                   justifyContent: "start",
                   paddingTop: "24px",
+                  paddingLeft: isMobile ? 2 : 0,
                 }}
               >
                 <Typography
@@ -116,6 +134,10 @@ export function Form() {
                   variant="outlined"
                   style={{ textTransform: "none" }}
                   sx={{ width: "169px" }}
+                  onClick={() =>
+                    (window.location.href =
+                      "https://chlogin.zd.eiam.admin.ch/auth/saml2/sso/IDP-PRIVATE?login&language=de")
+                  }
                 >
                   <Typography
                     sx={{
@@ -128,20 +150,22 @@ export function Form() {
                   </Typography>
                 </Button>
               </Box>
-              <Box
-                sx={{
-                  position: "relative",
-                  bottom: "30px",
-                  left: "80px",
-                }}
-              >
-                <img src={footerLogin} title="icon" height="147px" />
-              </Box>
+              {!isMobile && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    right: "32px",
+                    bottom: "8px",
+                  }}
+                >
+                  <img src={footerLogin} title="icon" height="147px" />
+                </Box>
+              )}
             </Box>
           </Box>
         </CardContent>
       </Card>
-      <Box sx={{ minWidth: 400, width: "90%", maxWidth: 950 }} mb={1}>
+      <Box sx={{ minWidth: 400, width: "90%", maxWidth: "950px" }} mb={1}>
         <Divider sx={{ color: "#CACED4" }} variant="fullWidth">
           <Typography sx={{ color: "#636464", fontSize: "0.8rem" }}>
             oder weiter mit

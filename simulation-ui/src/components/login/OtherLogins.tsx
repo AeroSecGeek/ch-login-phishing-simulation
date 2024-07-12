@@ -21,7 +21,7 @@ export function OtherLogins() {
       }}
     >
       {data.map((login) => (
-        <Grid md={3}>
+        <Grid xs={6} md={3}>
           <LoginCard picture={login.picture} title={login.title} />
         </Grid>
       ))}

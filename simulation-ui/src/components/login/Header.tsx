@@ -11,7 +11,7 @@ import HelpIcon from "@mui/icons-material/Help";
 
 export function Header() {
   return (
-    <Box>
+    <Box sx={{ position: "sticky", top: 0, bgcolor: "white" }}>
       <Box
         sx={{
           padding: "14px",
