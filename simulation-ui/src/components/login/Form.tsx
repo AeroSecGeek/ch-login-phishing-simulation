@@ -4,6 +4,12 @@ import {
   Card,
   CardContent,
   Divider,
+  FormControl,
+  IconButton,
+  InputAdornment,
+  InputLabel,
+  Link,
+  OutlinedInput,
   TextField,
   Typography,
   useMediaQuery,
@@ -11,15 +17,47 @@ import {
 } from "@mui/material";
 import chLogin from "../../assets/CH-Login.svg";
 import footerLogin from "../../assets/footer-login.svg";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { OtherLogins } from "./OtherLogins";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 
 export function Form() {
   const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+  const [displayPlaintext, setDisplayPlaintext] = useState(false);
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  function isValidEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  function handleContinue() {
+    if (isValidEmail(email)) {
+      setShowPassword(true);
+    } else {
+      setEmailError(true);
+    }
+  }
+
+  function handleLogin() {
+    if (password === "" || password.length <= 7) {
+      setPasswordError(true);
+    } else {
+      // submit Data to backend
+    }
+  }
+
+  useEffect(() => {
+    if (!showPassword) {
+      setPassword("");
+    }
+  }, [showPassword]);
 
   return (
     <Box
@@ -67,35 +105,143 @@ export function Form() {
               }}
             >
               <Typography sx={{ fontFamily: "Bold65", fontSize: "1.125rem" }}>
-                Geben Sie Ihr E-Mail ein, um fortzufahren
+                {showPassword
+                  ? "Geben Sie Ihr Passwort ein, um sich anzumelden"
+                  : "Geben Sie Ihr E-Mail ein, um fortzufahren"}
               </Typography>
-              <TextField
-                label="E-Mail*"
-                sx={{ mt: 1 }}
-                fullWidth
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
+              {showPassword && (
+                <Box>
+                  <Box
+                    sx={{
+                      mt: 1,
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Typography sx={{ fontSize: "0.875rem", color: "#636464" }}>
+                      {email}
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      style={{ textTransform: "none" }}
+                      onClick={() => setShowPassword(false)}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "RotisSansSerifLight",
+                          fontWeight: 400,
+                          fontSize: "1rem",
+                        }}
+                      >
+                        Ändern
+                      </Typography>
+                    </Button>
+                  </Box>
+                  <Box marginTop={1}>
+                    <FormControl sx={{ width: "100%" }} variant="outlined">
+                      <InputLabel htmlFor="outlined-adornment-password">
+                        Passwort*
+                      </InputLabel>
+                      <OutlinedInput
+                        id="outlined-adornment-password"
+                        type={displayPlaintext ? "text" : "password"}
+                        error={passwordError}
+                        fullWidth
+                        value={password}
+                        onChange={(event) => {
+                          setPassword(event.target.value);
+                          setPasswordError(false);
+                        }}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <IconButton
+                              aria-label="toggle password visibility"
+                              onClick={() =>
+                                setDisplayPlaintext(!displayPlaintext)
+                              }
+                              edge="end"
+                            >
+                              {displayPlaintext ? (
+                                <VisibilityOff htmlColor={"#636464"} />
+                              ) : (
+                                <Visibility htmlColor={"#636464"} />
+                              )}
+                            </IconButton>
+                          </InputAdornment>
+                        }
+                        label="Passwort*"
+                      />
+                    </FormControl>
+                  </Box>
+                  <Box marginTop={2}>
+                    <Link href="https://chlogin.zd.eiam.admin.ch/auth/saml2/sso/IDP-PRIVATE?login&language=de">
+                      Passwort vergessen?
+                    </Link>
+                  </Box>
+                </Box>
+              )}
+              {!showPassword && (
+                <TextField
+                  label="E-Mail*"
+                  helperText={
+                    emailError
+                      ? "Geben Sie bitte eine gültige E-Mail-Adresse ein"
+                      : ""
+                  }
+                  error={emailError}
+                  sx={{ mt: 1 }}
+                  fullWidth
+                  value={email}
+                  onChange={(event) => {
+                    setEmail(event.target.value);
+                    setEmailError(false);
+                  }}
+                />
+              )}
               <Box sx={{ mt: "32px", display: "flex", justifyContent: "end" }}>
                 <Box>
                   <Button style={{ textTransform: "none" }}>Abbrechen</Button>
-                  <Button
-                    style={{ textTransform: "none" }}
-                    sx={{
-                      ml: "24px",
-                    }}
-                    variant="contained"
-                  >
-                    <Typography
+                  {!showPassword && (
+                    <Button
+                      style={{ textTransform: "none" }}
                       sx={{
-                        fontFamily: "RotisSansSerifLight",
-                        fontWeight: 300,
-                        fontStretch: "extra-expanded",
+                        ml: "24px",
                       }}
+                      variant="contained"
+                      onClick={handleContinue}
                     >
-                      Weiter
-                    </Typography>
-                  </Button>
+                      <Typography
+                        sx={{
+                          fontFamily: "RotisSansSerifLight",
+                          fontWeight: 300,
+                          fontStretch: "extra-expanded",
+                        }}
+                      >
+                        Weiter
+                      </Typography>
+                    </Button>
+                  )}
+                  {showPassword && (
+                    <Button
+                      style={{ textTransform: "none" }}
+                      sx={{
+                        ml: "24px",
+                      }}
+                      variant="contained"
+                      onClick={handleLogin}
+                    >
+                      <Typography
+                        sx={{
+                          fontFamily: "RotisSansSerifLight",
+                          fontWeight: 300,
+                          fontStretch: "extra-expanded",
+                        }}
+                      >
+                        Login
+                      </Typography>
+                    </Button>
+                  )}
                 </Box>
               </Box>
             </Box>
@@ -158,7 +304,12 @@ export function Form() {
                     bottom: "8px",
                   }}
                 >
-                  <img src={footerLogin} title="icon" height="147px" />
+                  <img
+                    src={footerLogin}
+                    title="icon"
+                    height="147px"
+                    alt="Logo"
+                  />
                 </Box>
               )}
             </Box>
