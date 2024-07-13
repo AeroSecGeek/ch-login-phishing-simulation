@@ -20,6 +20,7 @@ import footerLogin from "../../assets/footer-login.svg";
 import { useEffect, useState } from "react";
 import { OtherLogins } from "./OtherLogins";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
+import { useLogAttemptMutation } from "../../services/api";
 
 export function Form() {
   const [email, setEmail] = useState("");
@@ -31,6 +32,8 @@ export function Form() {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  const [logAttempt, { isSuccess }] = useLogAttemptMutation();
 
   function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -49,7 +52,7 @@ export function Form() {
     if (password === "" || password.length <= 7) {
       setPasswordError(true);
     } else {
-      // submit Data to backend
+      logAttempt({ email });
     }
   }
 
@@ -58,6 +61,12 @@ export function Form() {
       setPassword("");
     }
   }, [showPassword]);
+
+  useEffect(() => {
+    if (isSuccess !== undefined && isSuccess) {
+      // navigate to next page
+    }
+  }, [isSuccess]);
 
   return (
     <Box
