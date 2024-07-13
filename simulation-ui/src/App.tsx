@@ -4,6 +4,7 @@ import { Login } from "./views/Login";
 import "./assets/fonts.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { primaryTheme } from "./components/layout/Theme";
+import { Dashboard } from "./views/admin/Dashboard";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/admin/dashboard" element={<Dashboard />} />
       </Routes>
     </ThemeProvider>
   );
