@@ -17,7 +17,7 @@ export function AdminDashboard() {
   }
 
   useEffect(() => {
-    if (error !== undefined) {
+    if (error !== undefined && "status" in error) {
       const status = error.status;
       if (status === 401) {
         setAuthError(true);
