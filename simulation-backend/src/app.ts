@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import routes from "./routes";
 import dotenv from "dotenv";
 import cors from "cors";
+import path from "path";
 
 dotenv.config();
 
@@ -21,6 +22,12 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api", routes);
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, "public")));
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "index.html"));
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
