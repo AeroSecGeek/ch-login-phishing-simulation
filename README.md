@@ -17,14 +17,16 @@ This Tool is designed to simulate a phishing CH-Login page. You can use it to te
 ### Run Frontend
 
 Start the frontend with the following commands:
-`cd simulation-ui`
-`pnpm run dev`
+
+- `cd simulation-ui`
+- `pnpm run dev`
 
 ### Run Backend
 
 Start the backend with the following commands:
-`cd simulation-backend`
-`pnpm run dev`
+
+- `cd simulation-backend`
+- `pnpm run dev`
 
 ## Deployment
 
