@@ -8,6 +8,24 @@ Work in Progress! Use at your own risk :-)
 
 This Tool is designed to simulate a phishing CH-Login page. You can use it to test employees using CH-Login on a daily basis if they fall for a phishing attack.
 
+## Development
+
+### Preconditions
+
+- You need a running MongoDB-Instance and you need to insert the uri into the `simulation-backend/.env`file.
+
+### Run Frontend
+
+Start the frontend with the following commands:
+`cd simulation-ui`
+`pnpm run dev`
+
+### Run Backend
+
+Start the backend with the following commands:
+`cd simulation-backend`
+`pnpm run dev`
+
 ## Deployment
 
 ### Settings
