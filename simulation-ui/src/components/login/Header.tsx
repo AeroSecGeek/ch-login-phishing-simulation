@@ -11,7 +11,16 @@ import HelpIcon from "@mui/icons-material/Help";
 
 export function Header() {
   return (
-    <Box sx={{ position: "sticky", top: 0, bgcolor: "white" }}>
+    <Box
+      sx={{
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100%",
+        bgcolor: "white",
+        zIndex: 1000,
+      }}
+    >
       <Box
         sx={{
           padding: "14px",
@@ -20,7 +29,9 @@ export function Header() {
           alignItems: "center",
         }}
       >
-        <Box sx={{ display: "flex", justifyContent: "start" }}>
+        <Box
+          sx={{ display: "flex", justifyContent: "start", bgcolor: "white" }}
+        >
           <img src={logo} alt="Logo" width={"216px"} />
           <Typography
             sx={{
@@ -32,7 +43,7 @@ export function Header() {
             eIAM
           </Typography>
         </Box>
-        <Box>
+        <Box bgcolor={"white"}>
           <Button sx={{ border: 1, color: "black", height: "40px" }}>
             <HelpIcon fontSize="small" />
           </Button>

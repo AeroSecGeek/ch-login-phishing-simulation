@@ -21,6 +21,7 @@ import { useEffect, useState } from "react";
 import { OtherLogins } from "./OtherLogins";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useLogAttemptMutation } from "../../services/api";
+import { Fedlogin } from "./Fedlogin";
 
 export function Form() {
   const [email, setEmail] = useState("");
@@ -76,6 +77,7 @@ export function Form() {
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        marginTop: "82px",
       }}
     >
       <Card
@@ -331,7 +333,24 @@ export function Form() {
             oder weiter mit
           </Typography>
         </Divider>
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
+          <Fedlogin />
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+          }}
+        >
           <OtherLogins />
         </Box>
       </Box>

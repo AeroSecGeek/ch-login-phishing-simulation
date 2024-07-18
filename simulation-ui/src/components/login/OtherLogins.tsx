@@ -9,23 +9,29 @@ import eZug from "../../assets/Button_EZugLogin.svg";
 import zgLogin from "../../assets/Button_ZGLogin.svg";
 
 import { LoginCard } from "./LoginCard";
+import { Box, Typography } from "@mui/material";
 
 export function OtherLogins() {
   return (
-    <Grid
-      container
-      spacing={1}
-      sx={{
-        maxWidth: "640px",
-        mt: 1,
-      }}
-    >
-      {data.map((login) => (
-        <Grid xs={6} md={3} key={login.title}>
-          <LoginCard picture={login.picture} title={login.title} />
-        </Grid>
-      ))}
-    </Grid>
+    <Box sx={{ mt: 4 }}>
+      <Typography sx={{ color: "#636464", fontSize: "0.9rem" }}>
+        Weitere Optionen
+      </Typography>
+      <Grid
+        container
+        spacing={1}
+        sx={{
+          maxWidth: "640px",
+          mt: 1,
+        }}
+      >
+        {data.map((login) => (
+          <Grid xs={6} md={3} key={login.title}>
+            <LoginCard picture={login.picture} title={login.title} />
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 }
 
