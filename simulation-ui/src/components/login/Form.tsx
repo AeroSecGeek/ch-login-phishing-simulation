@@ -22,6 +22,7 @@ import { OtherLogins } from "./OtherLogins";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useLogAttemptMutation } from "../../services/api";
 import { Fedlogin } from "./Fedlogin";
+import { useNavigate } from "react-router-dom";
 
 export function Form() {
   const [email, setEmail] = useState("");
@@ -34,7 +35,9 @@ export function Form() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const [logAttempt, { isSuccess }] = useLogAttemptMutation();
+  const navigate = useNavigate();
+
+  const [logAttempt, { data }] = useLogAttemptMutation();
 
   function isValidEmail(email: string): boolean {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -64,10 +67,11 @@ export function Form() {
   }, [showPassword]);
 
   useEffect(() => {
-    if (isSuccess !== undefined && isSuccess) {
-      // navigate to next page
+    console.log(data);
+    if (data !== undefined && data.success === true) {
+      navigate("/feedback");
     }
-  }, [isSuccess]);
+  }, [data]);
 
   return (
     <Box

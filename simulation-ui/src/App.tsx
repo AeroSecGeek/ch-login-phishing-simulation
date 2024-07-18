@@ -5,6 +5,7 @@ import "./assets/fonts.css";
 import { ThemeProvider } from "@mui/material/styles";
 import { primaryTheme } from "./components/layout/Theme";
 import { Dashboard } from "./views/admin/Dashboard";
+import { Feedback } from "./views/Feedback";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/admin/dashboard" element={<Dashboard />} />
+        <Route path="/feedback" element={<Feedback />} />
       </Routes>
     </ThemeProvider>
   );

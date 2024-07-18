@@ -5,7 +5,7 @@ import { AdminDashboard } from "../../components/admin/dashboard/AdminDashboard"
 export function Dashboard() {
   return (
     <Box>
-      <BasicAppBar />
+      <BasicAppBar title="Admin Dashboard" />
       <AdminDashboard />
     </Box>
   );

@@ -6,5 +6,5 @@ export const logAttempt = async (req: Request, res: Response) => {
   const loginAttempt = new LoginAttempt({ email });
   await loginAttempt.save();
   console.log("Attempt recorded");
-  res.send("Login attempt logged");
+  res.json({ success: true });
 };
