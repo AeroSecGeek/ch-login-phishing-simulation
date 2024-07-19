@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Modal from "@mui/material/Modal";
 import SecurityIcon from "@mui/icons-material/Security";
+import SimCardTwoToneIcon from "@mui/icons-material/SimCardTwoTone";
 
 interface SmartcardPasswordDialogProps {
   open: boolean;
@@ -22,20 +23,38 @@ const SmartcardPasswordDialog: React.FC<SmartcardPasswordDialogProps> = ({
       <Box sx={modalStyle}>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <SecurityIcon sx={{ mr: 2 }} />
-          <Typography variant="h6">Windows Security</Typography>
+          <Typography variant="body1">Windows Security</Typography>
         </Box>
-
+        <Typography variant="h5" sx={{ mt: 3, mb: 2 }}>
+          Smartcard
+        </Typography>
         <Typography variant="body1">Enter your smartcard PIN:</Typography>
-        <TextField
-          type="password"
-          placeholder="PIN"
-          variant="outlined"
-          fullWidth
-          sx={{ marginTop: "16px", marginBottom: "16px" }}
-        />
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
-          <Button variant="contained" color="primary" onClick={onSubmit}>
+        <Box sx={{ display: "flex", alignItems: "center" }}>
+          <SimCardTwoToneIcon
+            style={{ transform: "rotate(90deg)" }}
+            fontSize="large"
+            sx={{ mr: 1 }}
+          />
+          <TextField
+            type="password"
+            placeholder="PIN"
+            variant="outlined"
+            fullWidth
+            sx={{ marginTop: "16px", marginBottom: "16px" }}
+          />
+        </Box>
+        <Box sx={{ display: "flex", justifyContent: "space-evenly" }}>
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={onSubmit}
+            fullWidth
+            sx={{ mr: 1 }}
+          >
             OK
+          </Button>
+          <Button variant="outlined" onClick={onClose} fullWidth>
+            Cancel
           </Button>
         </Box>
       </Box>
