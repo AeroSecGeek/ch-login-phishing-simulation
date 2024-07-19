@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import LoginAttempt from "../models/loginAttempt";
+import LoginAttempt from "../models/chLoginAttempt";
 
 export const getDashboard = async (req: Request, res: Response) => {
   console.log("getDashboard");

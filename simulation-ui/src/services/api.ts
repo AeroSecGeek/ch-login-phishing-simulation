@@ -14,6 +14,12 @@ export const api = createApi({
         body,
       }),
     }),
+    logOtherAttempt: builder.mutation<LogAttemptRespDto, void>({
+      query: () => ({
+        url: "/log-other-attempt",
+        method: "POST",
+      }),
+    }),
     getDashboard: builder.query<
       LoggedAttemptDto[],
       { username: string; password: string }
@@ -28,4 +34,8 @@ export const api = createApi({
   }),
 });
 
-export const { useLogAttemptMutation, useLazyGetDashboardQuery } = api;
+export const {
+  useLogAttemptMutation,
+  useLogOtherAttemptMutation,
+  useLazyGetDashboardQuery,
+} = api;

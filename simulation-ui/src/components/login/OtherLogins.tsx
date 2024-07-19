@@ -10,8 +10,26 @@ import zgLogin from "../../assets/Button_ZGLogin.svg";
 
 import { LoginCard } from "./LoginCard";
 import { Box, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useLogOtherAttemptMutation } from "../../services/api";
+import { useEffect } from "react";
 
 export function OtherLogins() {
+  const navigate = useNavigate();
+
+  const [logOtherAttempt, { data: attemptData }] = useLogOtherAttemptMutation();
+
+  function handleLoginAreaClick() {
+    logOtherAttempt();
+  }
+
+  useEffect(() => {
+    if (data !== undefined && attemptData?.success) {
+      navigate("/feedback");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [attemptData]);
+
   return (
     <Box sx={{ mt: 4 }}>
       <Typography sx={{ color: "#636464", fontSize: "0.9rem" }}>
@@ -27,7 +45,11 @@ export function OtherLogins() {
       >
         {data.map((login) => (
           <Grid xs={6} md={3} key={login.title}>
-            <LoginCard picture={login.picture} title={login.title} />
+            <LoginCard
+              picture={login.picture}
+              title={login.title}
+              onClick={handleLoginAreaClick}
+            />
           </Grid>
         ))}
       </Grid>

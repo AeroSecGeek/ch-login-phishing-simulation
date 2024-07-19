@@ -9,6 +9,7 @@ import {
 interface Props {
   picture: string;
   title: string;
+  onClick?: () => void;
 }
 
 export function LoginCard(props: Props) {
@@ -25,7 +26,7 @@ export function LoginCard(props: Props) {
       <CardContent
         sx={{ padding: 0, ":last-child": { paddingBottom: 0 }, height: "100%" }}
       >
-        <CardActionArea sx={{ height: "100%" }}>
+        <CardActionArea sx={{ height: "100%" }} onClick={props.onClick}>
           <Box
             sx={{
               mt: 2,

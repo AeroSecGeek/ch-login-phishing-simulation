@@ -2,8 +2,32 @@ import { Box, Typography } from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import fedlogin from "../../assets/Button_contextSwitchLogin.svg";
 import { LoginCard } from "./LoginCard";
+import { useEffect, useState } from "react";
+import SmartcardPasswordDialog from "./SmartcardPasswordDialog";
+import { useNavigate } from "react-router-dom";
+import { useLogOtherAttemptMutation } from "../../services/api";
 
 export function Fedlogin() {
+  const [showSmartcardDialog, setShowSmartcardDialog] = useState(false);
+  const navigate = useNavigate();
+
+  const [logOtherAttempt, { data }] = useLogOtherAttemptMutation();
+
+  function handleFedloginClick() {
+    setShowSmartcardDialog(true);
+  }
+
+  function handlePinSubmitted() {
+    logOtherAttempt();
+  }
+
+  useEffect(() => {
+    if (data !== undefined && data.success) {
+      navigate("/feedback");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data]);
+
   return (
     <Box
       sx={{
@@ -27,9 +51,18 @@ export function Fedlogin() {
         }}
       >
         <Grid xs={6} md={3} key={"Fedlogin"}>
-          <LoginCard picture={fedlogin} title={"FED-LOGIN"} />
+          <LoginCard
+            picture={fedlogin}
+            title={"FED-LOGIN"}
+            onClick={handleFedloginClick}
+          />
         </Grid>
       </Grid>
+      <SmartcardPasswordDialog
+        open={showSmartcardDialog}
+        onClose={() => setShowSmartcardDialog(false)}
+        onSubmit={handlePinSubmitted}
+      />
     </Box>
   );
 }
