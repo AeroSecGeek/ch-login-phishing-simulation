@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { LogAttemptDto } from "../models/LogAttemptDto";
-import { LoggedAttemptDto } from "../models/LoggedAttemptDto";
+import { DashboardDto } from "../models/DashboardDto";
 import { LogAttemptRespDto } from "../models/LogAttemptRespDto";
 
 export const api = createApi({
@@ -21,7 +21,7 @@ export const api = createApi({
       }),
     }),
     getDashboard: builder.query<
-      LoggedAttemptDto[],
+      DashboardDto,
       { username: string; password: string }
     >({
       query: ({ username, password }) => ({

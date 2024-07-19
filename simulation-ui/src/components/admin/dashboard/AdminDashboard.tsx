@@ -53,7 +53,10 @@ export function AdminDashboard() {
         <Box sx={{ mt: 2 }}>
           <Divider sx={{ mb: 2 }} />
           <Typography variant="h5">Attempted Logins </Typography>
-          <AttemptGrid data={data} />
+          <Typography>
+            Other login attemtps (FED, AGOV etc.): {data.otherAttempts}
+          </Typography>
+          <AttemptGrid data={data.chLogin} />
         </Box>
       )}
     </Box>
