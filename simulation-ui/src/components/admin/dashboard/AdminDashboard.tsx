@@ -52,7 +52,10 @@ export function AdminDashboard() {
       {data !== undefined && (
         <Box sx={{ mt: 2 }}>
           <Divider sx={{ mb: 2 }} />
-          <Typography variant="h5">Attempted Logins </Typography>
+          <Typography variant="h5" sx={{ mb: 1 }}>
+            Attempted Logins
+          </Typography>
+          <Typography>Number of Clicks: {data.numberOfVisits}</Typography>
           <Typography>
             Other login attemtps (FED, AGOV etc.): {data.otherAttempts}
           </Typography>

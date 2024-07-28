@@ -20,6 +20,12 @@ export const api = createApi({
         method: "POST",
       }),
     }),
+    logVisit: builder.mutation<LogAttemptRespDto, void>({
+      query: () => ({
+        url: "/log-visit",
+        method: "POST",
+      }),
+    }),
     getDashboard: builder.query<
       DashboardDto,
       { username: string; password: string }
@@ -38,4 +44,5 @@ export const {
   useLogAttemptMutation,
   useLogOtherAttemptMutation,
   useLazyGetDashboardQuery,
+  useLogVisitMutation,
 } = api;
